@@ -85,6 +85,7 @@ interface KCrudI {
     fun truncateTable(entity: Class<*>): Boolean
     fun truncateAllTables(schemaName: String = ""): Boolean
     fun dropAllTables(): Boolean
+    fun createSchema(schema: String): Boolean
 }
 
 private val gson = Gson()
@@ -125,6 +126,10 @@ object KCrud : KCrudI {
         return execute(sql)
     }
 
+    override fun createSchema(schema: String): Boolean {
+        val sql = "CREATE SCHEMA IF NOT EXISTS $schema"
+        return execute(sql)
+    }
 
     private const val createTableIfMissing: Boolean = true
 

@@ -3,12 +3,12 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.Instant
 
-class ORMTest {
+class KCrudTest {
 
     @BeforeEach
     fun before() {
-        KCrud.execute("drop schema if exists test CASCADE")
-        KCrud.execute("create schema if not exists test")
+        KCrud.dropSchema("test")
+        KCrud.createSchema("test")
     }
 
     @Test
@@ -49,7 +49,6 @@ class ORMTest {
         data class DummyModel4(@Id val name: String, @Indexed val data: String, @Id val anint: Int, val dob: Instant)
         KCrud.createTable(DummyModel4::class.java)
     }
-
 
 
 }
